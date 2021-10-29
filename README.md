@@ -1,13 +1,29 @@
 DETR
 ==============================
+![image](https://user-images.githubusercontent.com/76114246/139389001-ae0e25c5-e0f2-474b-b01a-9acb0bbb7751.png)
+DETR object detection model formulates the problem of object detection as a direct set prediction problem effectively removing the need for hand designed components like a non max supression or anchor box generation that explicitly encode the knowledge of the task. It uses a transformer encoder-decoder based architecture to output set predictions in parallel. 
 
-DETR object detection using the pascal voc 2012 object detection dataset
+![image](https://user-images.githubusercontent.com/76114246/139389968-eb79aee6-467e-4ef3-89b8-183ff2f9a09d.png)
+
+Transformer architecture
+-----------------------
+The transformer architecture is slightly different from [Vaswani et al](https://arxiv.org/abs/1706.03762) and uses a positional encoding at each encoder and decoder layer.
+![image](https://user-images.githubusercontent.com/76114246/139390148-31410e20-5305-43ef-87b5-c2c44025d8b3.png)
+
+
+Loss Function
+--------------------
+The loss functions used are a giou loss for bounding box, a negative log likelihood loss for class predictions and an L1 loss for the predicted and ground truth boxes.
+
+Dataset
+---------------------
+The DETR model is being trained on the Pascal VOC 2012 object detection dataset with 20 classes and around 5000 train and validation images.
 
 sample images
 -------------
-![2008_000142](https://user-images.githubusercontent.com/76114246/136657983-0f7a6796-c02f-44c4-af03-ca704de34b97.jpg)
-![2008_000196](https://user-images.githubusercontent.com/76114246/136658004-e30bb8e6-7f23-486a-a128-0efa8e2b89b2.jpg)
--------------
+2008_000142          |  2008_000196
+:-------------------------:|:-------------------------:
+![2008_000142](https://user-images.githubusercontent.com/76114246/136657983-0f7a6796-c02f-44c4-af03-ca704de34b97.jpg)  |  ![2008_000196](https://user-images.githubusercontent.com/76114246/136658004-e30bb8e6-7f23-486a-a128-0efa8e2b89b2.jpg)
 
 sample annotation file:
 ----------------------
@@ -26,136 +42,6 @@ sample annotation file:
 		<depth>3</depth>
 	</size>
 	<segmented>0</segmented>
-	<object>
-		<name>person</name>
-		<pose>Frontal</pose>
-		<truncated>1</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>271</xmin>
-			<ymin>170</ymin>
-			<xmax>386</xmax>
-			<ymax>234</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>person</name>
-		<pose>Frontal</pose>
-		<truncated>1</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>295</xmin>
-			<ymin>189</ymin>
-			<xmax>328</xmax>
-			<ymax>231</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>person</name>
-		<pose>Frontal</pose>
-		<truncated>1</truncated>
-		<occluded>0</occluded>
-		<bndbox>
-			<xmin>206</xmin>
-			<ymin>176</ymin>
-			<xmax>256</xmax>
-			<ymax>236</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>person</name>
-		<pose>Frontal</pose>
-		<truncated>0</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>122</xmin>
-			<ymin>162</ymin>
-			<xmax>198</xmax>
-			<ymax>330</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>person</name>
-		<pose>Frontal</pose>
-		<truncated>1</truncated>
-		<occluded>0</occluded>
-		<bndbox>
-			<xmin>457</xmin>
-			<ymin>212</ymin>
-			<xmax>500</xmax>
-			<ymax>297</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>person</name>
-		<pose>Unspecified</pose>
-		<truncated>1</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>438</xmin>
-			<ymin>173</ymin>
-			<xmax>500</xmax>
-			<ymax>243</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>chair</name>
-		<pose>Right</pose>
-		<truncated>1</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>351</xmin>
-			<ymin>272</ymin>
-			<xmax>452</xmax>
-			<ymax>375</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>chair</name>
-		<pose>Rear</pose>
-		<truncated>0</truncated>
-		<occluded>0</occluded>
-		<bndbox>
-			<xmin>265</xmin>
-			<ymin>250</ymin>
-			<xmax>353</xmax>
-			<ymax>364</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>chair</name>
-		<pose>Rear</pose>
-		<truncated>0</truncated>
-		<occluded>0</occluded>
-		<bndbox>
-			<xmin>189</xmin>
-			<ymin>260</ymin>
-			<xmax>286</xmax>
-			<ymax>375</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
-	<object>
-		<name>diningtable</name>
-		<pose>Unspecified</pose>
-		<truncated>0</truncated>
-		<occluded>1</occluded>
-		<bndbox>
-			<xmin>149</xmin>
-			<ymin>224</ymin>
-			<xmax>402</xmax>
-			<ymax>331</ymax>
-		</bndbox>
-		<difficult>0</difficult>
-	</object>
 	<object>
 		<name>pottedplant</name>
 		<pose>Unspecified</pose>
